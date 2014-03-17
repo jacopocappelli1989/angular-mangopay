@@ -13,20 +13,31 @@ angular.module('jcappelli.mangopay', [])
 
 				console.log("senddata");
 
+    			var datiMangoPay = {
+    				data: preregistrationData,
+                	accessKeyRef: accessKey,
+                	cardNumber: cardNumber,
+                	cardExpirationDate: cardExpirationDate,
+                	cardCvx: cardCvx
+    			};
+
+    			console.log("Dati mango pay:"+JSON.stringify(datiMangoPay));
+
+    			var parametriMango = "";
+				for(key in datiMangoPay) {
+					parametriMango += (parametriMango.length > 0 ? '&' : '' ) + key + "=" + encodeURIComponent(datiMangoPay[key]);
+				}
+
+				console.log("Parametri:"+parametriMango);
+
+
 				$http.defaults.useXDomain = true;
     			delete $http.defaults.headers.common['X-Requested-With'];
-    			//$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
 				return $http({
 		            url: cardRegistrationURL,
 		            method: 'POST',
-		            data: {
-						'data': preregistrationData,
-                		'accessKeyRef': accessKey,
-                		'cardNumber': cardNumber,
-                		'cardExpirationDate': cardExpirationDate,
-                		'cardCvx': cardCvx
-		            },
+		            data: parametriMango,
 		            headers:{'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'} 
 		        })
 		        .success(function(data, status, headers, config) {
