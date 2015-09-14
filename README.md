@@ -27,3 +27,6 @@ Usage in code
     
 Important
 expiry date format is 0915 two digit for month and last two digit for year
+
+# Copyright
+<a href="https://www.keepup.pro/" target="_blank">Web Agency KeepUP</a>
